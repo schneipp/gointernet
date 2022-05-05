@@ -9,12 +9,12 @@ import (
 	"strings"
 )
 
-type internet struct {
+type Internet struct {
 	lastUrl string
 	client  *http.Client
 }
 
-func New() internet {
+func New() Internet {
 	jar, _ := cookiejar.New(nil)
 	e := internet{
 		"",
@@ -28,7 +28,7 @@ func New() internet {
 	return e
 }
 
-func (i internet) GetUrl(targetUrl string) ([]byte, error) {
+func (i Internet) GetUrl(targetUrl string) ([]byte, error) {
 	req, err := http.NewRequest("GET", targetUrl, nil)
 	if err != nil {
 		log.Fatalln(err)
@@ -50,7 +50,7 @@ func (i internet) GetUrl(targetUrl string) ([]byte, error) {
 	return body, err
 }
 
-func (i internet) PostUrl(targetUrl string, payload string) ([]byte, error) {
+func (i Internet) PostUrl(targetUrl string, payload string) ([]byte, error) {
 
 	data := url.Values{}
 	for _, v := range strings.Split(payload, "&") {
